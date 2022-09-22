@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    height: 100vh;
+    margin: 0 auto;
+    max-width: 1600px;
+}
+header {
+    width: 100%;
+    background: #49d7ea;
+    display: flex;
+    justify-content: space-around;
+    height: 5rem;
+    font-size: 18px;
+
+    .header__block{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+            .header__block-box
+            {
+                margin-left: 3rem;
+            }
+          
+    }
+    .header__shopping-cart-block{
+        display: flex;
+        align-items: center;
+            .header__shopping-cart-block_icon{
+               &:hover{
+                background: rgba(216, 216, 219, 0.532);
+            }
+            }
+           
+        div{
+            margin-left: 2em;
+        }
+        .header__shopping-cart-block_price{
+            width: 10em;
+            p{
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+table {
+    padding: 2em 0px;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid grey;
+   
+
+    th, td {
+        border: 1px solid grey;
+        padding: 4px;
+        text-align: center;
+    }
+    .table-name{
+        text-align: left;
+        padding-left: 20px;
+        width: 25%;
+    }
+    .table-rank{
+        width: 5%;
+    }
+    .icon-plus{
+       
+       img{ 
+        
+        cursor: pointer;
+       }
+    }
+ 
+}
+.content{
+background: #ffffff;
+}   
+
+.block{
+    background: rgb(5, 89, 102);
+    margin: 30px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+
+ 
+    .block-items{
+        display: flex;
+        color: #f2f2f2;
+        padding: 20px 0;
+
+      p{
+        font-size: 24px;
+        padding-left: 20px;
+      }  
+    }
+    .addCoin{
+        
+        color: red;
+        background: #f2f2f2;
+        font-size: 24px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        margin: 20px 0px;
+        cursor: pointer;
+    }
+}
+
