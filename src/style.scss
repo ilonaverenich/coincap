@@ -8,23 +8,43 @@ html{
     height: 100vh;
     margin: 0 auto;
     max-width: 1600px;
+    font-family: 'Roboto', sans-serif;
 }
 header {
     width: 100%;
-    background: #49d7ea;
     display: flex;
     justify-content: space-around;
     height: 5rem;
     font-size: 18px;
+    background: #f8f7f6;
 
     .header__block{
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+
+        .header__block-title{
+        width: 100%;
+        font-size: 14px;
+        border-bottom: 1px solid rgba(201, 201, 201, 0.84);
+        margin-bottom: 10px;
+        text-align: center;
+        }
+      .header__block-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
 
             .header__block-box
             {
                 margin-left: 3rem;
+                div {
+                    font-size: 16px;
+                }
             }
           
     }
@@ -33,7 +53,7 @@ header {
         align-items: center;
             .header__shopping-cart-block_icon{
                &:hover{
-                background: rgba(216, 216, 219, 0.532);
+               
             }
             }
            
@@ -51,13 +71,14 @@ header {
 }
 table {
     padding: 2em 0px;
-    width: 100%;
+    width: 60%;
+    margin: 20px auto;
     border-collapse: collapse;
-    border: 3px solid grey;
+    border: 2px solid rgb(241, 241, 241);
    
 
     th, td {
-        border: 1px solid grey;
+        border: 1px solid rgb(241, 241, 241);
         padding: 4px;
         text-align: center;
     }
@@ -72,14 +93,13 @@ table {
     .icon-plus{
        
        img{ 
-        
         cursor: pointer;
        }
     }
  
 }
 .content{
-background: #ffffff;
+
 }   
 
 .block{
@@ -102,7 +122,6 @@ background: #ffffff;
     }
     .addCoin{
         
-        color: red;
         background: #f2f2f2;
         font-size: 24px;
         font-weight: bold;
