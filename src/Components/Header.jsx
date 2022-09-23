@@ -1,29 +1,33 @@
 import {useSelector, useDispatch} from 'react-redux';
+import {useState, useEffect} from 'react'
 
 function Header() {
 
   const countPrice  = useSelector((store)=>store.data.countPrice)
   const coin = useSelector((store)=>store.data.coin[0])
-console.log(coin)
+
+
+
   return (
     <header> 
     
           <div className='header__block'>
            <div className='header__block-title'>
-            
-            Популярные криптовалюты:
+
+          <p>Популярные криптовалюты: </p>
+           
            </div>
           <div className='header__block-content'>
               <div className='header__block-box'>
-                  <div className='header__block-box_name'>{coin && coin[0] && coin[0].name}</div>
+                  <div className='header__block-box_name'><b>{coin && coin[0] && coin[0].name}</b></div>
                   <div className='header__block-box_price'>{coin && coin[0] && (+coin[0].priceUsd).toFixed(2)}$</div>
                 </div>
                 <div className='header__block-box'>
-                  <div className='header__block-box_name'>{coin && coin[1] && coin[1].name}</div>
+                  <div className='header__block-box_name'><b>{coin && coin[1] && coin[1].name}</b></div>
                   <div className='header__block-box_price'>{coin && coin[1] && (+coin[1].priceUsd).toFixed(2)}$</div>
                 </div>
                 <div className='header__block-box'>
-                  <div className='header__block-box_name'>{coin && coin[2] && coin[2].name}</div>
+                  <div className='header__block-box_name'><b>{coin && coin[2] && coin[2].name}</b></div>
                   <div className='header__block-box_price'>{coin && coin[2] && (+coin[2].priceUsd).toFixed(2)}$</div>
                 </div>
             </div>

@@ -30,6 +30,8 @@ header {
         border-bottom: 1px solid rgba(201, 201, 201, 0.84);
         margin-bottom: 10px;
         text-align: center;
+        display: flex;
+        justify-content: space-between;
         }
       .header__block-content{
         display: flex;

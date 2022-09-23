@@ -29,7 +29,7 @@ function Main() {
               <tr>
                 <th>№</th>
                 <th>Name</th>
-                <th>Sumbol</th>
+                <th>Symbol</th>
                 <th>Price</th>
                 <th>Add</th>
               </tr>
