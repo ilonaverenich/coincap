@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+   
 }
 
 html{
@@ -9,7 +10,10 @@ html{
     margin: 0 auto;
     max-width: 1600px;
     font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+
 }
+
 header {
     width: 100%;
     display: flex;
@@ -101,6 +105,7 @@ table {
  
 }
 .content{
+   
 
 }   
 
@@ -136,3 +141,69 @@ table {
     }
 }
 
+.modal{
+ background: #fefefe;
+    width: 100%;
+    position: absolute; 
+    z-index: 10000;   
+    top: 20%;
+    left: 34%;
+    width: 37%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+ 
+    box-shadow: 1px 1px 4px rgb(236, 0, 145);
+
+    .modal__title-block_close{
+
+     display: flex;
+     justify-content: flex-end;
+     margin: 10px 0px;
+        img{
+            display: block;
+            cursor: pointer;
+        }
+    }
+    .modal__content{
+        background: rgb(241, 241, 241);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        width: 34vw;
+        height: 70%;
+        border-radius: 10px;
+
+        .modal__content_btn-input{
+            padding: 5px 10px;
+            font-size: 24px;
+            text-align: center;
+            width: 30%;
+        }
+    }
+
+  .modal__title-block_buy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 10px;
+    p{
+        color: rgb(236, 0, 145);
+        font-weight: bold;
+        margin-left: 10px 
+    }
+
+  }
+}
+.transpatent{
+    opacity: 0.1;
+    overflow-y: hidden;
+}
+.btn{
+    padding: 5px 10px;
+    min-width: 100px;
+}

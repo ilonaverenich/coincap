@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {addCountListAction,removeRepeatsCountListAction,calcCoinPrice} from '../redux/mainReducer'
+import {addCountListAction,removeRepeatsCountListAction,calcCoinPrice,changeStateAddCoin} from '../redux/mainReducer'
+import AddedCoinModule from './AddedCoinModule';
 
 function Icon(props) {
  const{id,priceUsd} = props; 
@@ -13,15 +14,16 @@ function Icon(props) {
  const dispatch = useDispatch()
 
  const count  = useSelector((store)=>store.data.countPrice)
- const listCoinState  = useSelector((store)=>store.data.listCoinState)
+ const stateAddCoin  = useSelector((store)=>store.data.stateAddCoin)
 
 
  function handleFunc(){
-console.log(id)
+  state?dispatch(changeStateAddCoin(true)):dispatch(changeStateAddCoin(false))
   setState(state?false:true)
   setData(priceUsd)
   dispatch(calcCoinPrice())
-  state ? dispatch(addCountListAction({id,priceUsd})): dispatch(removeRepeatsCountListAction({id,priceUsd}))
+  state ? dispatch(addCountListAction({id,priceUsd})): dispatch(removeRepeatsCountListAction({id,priceUsd}));
+
  }
 
 
