@@ -1,12 +1,19 @@
 import './style.scss'
 import Header from './Components/Header';
 import Main from './Components/Main';
+import InfoCoin from './Components/InfoCoin';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
   return (
     <div className="wrapper">
       <Header/>
-      <Main/>
+     <BrowserRouter>
+          <Routes>
+          <Route path='/' element={<Main/>}></Route>
+          <Route path='/info' element={<InfoCoin/>}></Route>
+          </Routes>      
+     </BrowserRouter>
     </div>
   );
 }

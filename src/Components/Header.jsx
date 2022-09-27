@@ -37,7 +37,7 @@ function Header() {
             <div className='header__shopping-cart-block_icon'>
               <img src="https://i.postimg.cc/yYN3ZN73/icons8-50.png" alt="icon-shopping-card" />
             </div>
-          <div className='header__shopping-cart-block_price'>Итого: <p>{countPrice} $</p> </div>
+          <div className='header__shopping-cart-block_price'>Итого: <p>{countPrice.toFixed(2)} $</p> </div>
           </div>
           
         </header>

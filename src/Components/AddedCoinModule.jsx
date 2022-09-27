@@ -1,43 +1,51 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {changeStateAddCoin, calcCoinPrice} from '../redux/mainReducer'
+import {changeStateAddCoin, calcCoinPrice,addNewPriceCoinArray} from '../redux/mainReducer'
 
 
 
 function AddedCoinModule() {
-const stateAddCoin  = useSelector((store)=>store.data.stateAddCoin)
 const coin = useSelector((store)=>store.data.listCoinState)
-const [value,setInputValue] = useState(0)
-const [arrayCount,setArrayCount] = useState([])
-const [rezVal,setRezVal] = useState(0)
+const [value,setInputValue] = useState()
+const [state,setState] = useState(false)
+
+const textInput = useRef(null)
+
 const dispatch = useDispatch()
 
+useEffect(()=>{
+   textInput.current.focus()
+},[]) 
 
 function handleSubmit(){
-/*    dispatch(changeStateAddCoin(false)) */
-   setArrayCount([...arrayCount, +(+value * +(+(coin[0].priceUsd)).toFixed(2)).toFixed(2)])   
-   let v = arrayCount.reduce((p,v)=>p+v,0)
-   setRezVal(v)
-   console.log(arrayCount)
+   if(!isNaN(value)){
+   
+         dispatch(addNewPriceCoinArray(+(+value * +(+(coin[coin.length-1].priceUsd)).toFixed(2)).toFixed(2)))
+         dispatch(calcCoinPrice())
+         dispatch(changeStateAddCoin(false))
+      }
+      else{
+         setState(true)
+      } 
+
 } 
   return (
      <div className='modal'>
         <div className='modal__title-block'>
             <div className='modal__title-block_close'>
-               <img src="https://i.postimg.cc/GtZzT2TC/icons8-24.png" alt="close" onClick={()=>dispatch(changeStateAddCoin(false))} />
+               <img src="https://i.postimg.cc/GtZzT2TC/icons8-24.png" title='close' alt="close" onClick={()=>dispatch(changeStateAddCoin(false))} />
             </div>
            <div className='modal__title-block_buy'>
            Купить 
-           <p>{coin[0].name} </p>
+           <p>{coin[coin.length-1].name}</p>
            </div>
-          <div className='modal__content'>
+          <div className='modal__content-box'>
+            <div className='modal__content'>
             <p className='modal__content_text'>  Введите количество: </p>
-            <input onChange={(e)=>setInputValue(e.target.value)} value={value} className='modal__content_btn-input' />
-            <p>
-               Тестовый блок корзины: {rezVal}
-            </p>
-            <p>Цена за {value}  {coin[0].name} : {arrayCount[0]} $ </p>
+               <input ref={textInput}  onChange={(e)=>setInputValue(e.target.value)} value={value} className={state?'modal__content_btn-input input-error':'modal__content_btn-input'} />
+                  {state ? <span>Ошибка! Неправильный формат данных! </span>:''}
             <button className='btn modal__content_btn-add' onClick={()=> handleSubmit()} >Добавить</button>
+            </div>
   
           </div>
             

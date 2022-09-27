@@ -4,7 +4,9 @@ const initialValue ={
     coin:[],
     listCoinState:[],
     countPrice:0,
-    stateAddCoin: false
+    stateAddCoin: false,
+    arrayNewPrice:[],
+    activeCoin:[]
 }
 
 export const coinListAction = createAction('ADD_LIST_COIN')
@@ -12,8 +14,11 @@ export const addCountListAction = createAction('ADD_COUNT_LIST_COIN')
 export const removeRepeatsCountListAction = createAction('REMOVE_REPEATS_COUNT_LIST_COIN')
 
 export const calcCoinPrice = createAction('CALC_COIN_PRICE')
+export const addNewPriceCoinArray = createAction('NEW_ARRAY_PRICE_COIN')
 
 export const changeStateAddCoin = createAction('CHANGE_STATE_ADD_COIN')
+
+export const changeActiveCoin = createAction('CHANGE_ACTIVE_COIN')
 
 
 export default createReducer(initialValue,{
@@ -33,12 +38,26 @@ export default createReducer(initialValue,{
      console.log(state.listCoinState) */
 
      },
-
      [changeStateAddCoin]: function(state,action){
-       state.stateAddCoin = action.payload;
-        },
+        state.stateAddCoin = action.payload;
+         },
 
+     [changeActiveCoin]: function(state,action){
+        state.activeCoin = action.payload;
+    },
 
+     [addNewPriceCoinArray]: function(state,action){
+        
+       state.arrayNewPrice = [...state.arrayNewPrice, action.payload] 
+    },
+        [calcCoinPrice]: function(state){
+            state.countPrice = state.arrayNewPrice.reduce((a,b)=>a+b,0)
+   
+            },
+
+       /*  [calcCoinPrice]: function(state){
+            state.countPrice = [...state.listCoinState.map(item=>(Number(item.priceUsd)).toFixed(2)).map(el=>+el)].reduce((a,b)=>a+b,0).toFixed(2)
+            }, */
 
      
   /*    [calcCoinPrice]: function(state){

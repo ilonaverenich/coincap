@@ -156,7 +156,14 @@ table {
     border-radius: 10px;
  
     box-shadow: 1px 1px 4px rgb(236, 0, 145);
-
+    .modal__content-box{
+        border-radius: 10px;
+        background: rgb(241, 241, 241);
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .modal__title-block_close{
 
      display: flex;
@@ -168,20 +175,29 @@ table {
         }
     }
     .modal__content{
-        background: rgb(241, 241, 241);
+       
         display: flex;
         align-items: center;
         justify-content: space-around;
         flex-direction: column;
-        width: 34vw;
+        min-width: 34vw;
         height: 70%;
-        border-radius: 10px;
+       
 
         .modal__content_btn-input{
             padding: 5px 10px;
             font-size: 24px;
             text-align: center;
             width: 30%;
+        }
+        .input-error{
+            border-color: red;
+        }
+        span{
+            display: block;
+            margin-top: -10px;
+            color: red;
+            font-weight: bold;
         }
     }
 
@@ -207,3 +223,4 @@ table {
     padding: 5px 10px;
     min-width: 100px;
 }
+
