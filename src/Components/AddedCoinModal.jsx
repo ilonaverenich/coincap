@@ -36,7 +36,7 @@ function handleSubmit(){
                <img src="https://i.postimg.cc/GtZzT2TC/icons8-24.png" title='close' alt="close" onClick={()=>dispatch(changeStateAddCoin(false))} />
             </div>
            <div className='modal__title-block_buy'>
-           Купить 
+              Купить 
            <p>{coin[coin.length-1].name}</p>
            </div>
           <div className='modal__content-box'>

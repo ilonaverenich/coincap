@@ -3,9 +3,10 @@ import {useSelector, useDispatch} from 'react-redux'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Icon from './Icon';
-import AddedCoinModule from './AddedCoinModule';
+import AddedCoinModule from './AddedCoinModal';
 import { useNavigate } from "react-router-dom";
 import Name from './Name';
+import Briefcase from './BriefcaseModal';
 
 
 //https://api.coincap.io/v2/assets?limit=10
@@ -14,6 +15,7 @@ function Main() {
 
   const [coins, setCoins] = useState([])
   const stateAddCoin  = useSelector((store)=>store.data.stateAddCoin)
+  const stateBriefcase = useSelector((store)=>store.data.stateBriefcase)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,22 +37,30 @@ function Main() {
   return (
     <div>
             {stateAddCoin?<AddedCoinModule/>:''}
-            <section className={stateAddCoin?'content transpatent':'content'}>
+            {stateBriefcase?<Briefcase/>:''}
+            <section className={stateAddCoin || stateBriefcase ?'content transpatent':'content'}>
           <div className='content__table'>
             <table>
               <tr>
                 <th>№</th>
+                <th></th>
                 <th>Name</th>
-                <th>Symbol</th>
+                <th>VWAP (24Hr)</th>
+                <th>Change (24Hr)</th>
+                <th>Market Cap</th>
                 <th>Price</th>
-                <th>Add</th>
+                <th></th>
               </tr>
               {coins && coins.map(item=>
                  <tr >
                 <td className='table-rank'>{item.rank}</td>
-                <td className='table-name' onClick={()=>handleFunc(item)}><Name name={item.name}/></td>
-                <td> {item.symbol} </td>
-                <td> {(+item.priceUsd).toFixed(2)}$ </td>
+                <td className='table-symbol'><b>{item.symbol}</b></td>
+                <td className='table-name' onClick={()=>handleFunc(item)}> 
+                <Name name={item.name}/></td>
+                <td>{(+item.vwap24Hr).toFixed(2)} $</td>
+                <td className={item.changePercent24Hr[0]=='-'?'red':'green'}>{(+item.changePercent24Hr).toFixed(2)} $</td>
+                <td>{(+item.marketCapUsd).toFixed(2)}$</td>
+                <td><b>{(+item.priceUsd).toFixed(2)}$</b></td>
                 <Icon id={item.id} priceUsd={(+item.priceUsd).toFixed(2)}/>
                 
             

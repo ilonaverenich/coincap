@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {addCountListAction,removeRepeatsCountListAction,calcCoinPrice,changeStateAddCoin} from '../redux/mainReducer'
-import AddedCoinModule from './AddedCoinModule';
+import AddedCoinModule from './AddedCoinModal';
 
 function Icon(props) {
  const{id,priceUsd} = props; 
@@ -27,7 +27,7 @@ function Icon(props) {
  }
 
 
-  return <td className='icon-plus' onClick={()=>handleFunc()}>{state?<img src='https://i.postimg.cc/RFNjK6vK/icons8-add-new-24.png'/>:<img src='https://i.postimg.cc/pdnSd1N8/icons8-24.png'/>}</td>
+  return <td className='icon-plus' onClick={()=>handleFunc()}>{state?<img width={15} src='https://i.postimg.cc/x1VLv5m3/icons8-24-1.png'/>:<img src='https://i.postimg.cc/pdnSd1N8/icons8-24.png'/>}</td>
 }
 
 export default Icon
