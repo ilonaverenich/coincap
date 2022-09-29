@@ -22,6 +22,8 @@ header {
     justify-content: space-around;
     height: 5rem;
     font-size: 18px;
+    margin: 0 auto;
+    
     background: #f8f7f6;
     .img-briefcase{
         cursor: pointer;
@@ -31,6 +33,7 @@ header {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 200px;
 
         .header__block-title{
         width: 100%;
@@ -39,19 +42,19 @@ header {
         margin-bottom: 10px;
         text-align: center;
         display: flex;
-        justify-content: space-between;
+ 
+    
         }
       .header__block-content{
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        align-items: center;
         width: 100%;
+        
       }
 
             .header__block-box
             {
-                margin-left: 3rem;
+                margin-right: 3rem;
                 div {
                     font-size: 16px;
                 }
@@ -59,8 +62,10 @@ header {
           
     }
     .header__shopping-cart-block{
+
         display: flex;
         align-items: center;
+        justify-content: flex-end;
             .header__shopping-cart-block_icon{
                &:hover{
                
@@ -68,10 +73,13 @@ header {
             }
            
         div{
-            margin-left: 2em;
+    
+             text-align: left;
+            padding-right: 20px;
         }
         .header__shopping-cart-block_price{
-            width: 10em;
+            width: 8em;
+            justify-content: flex-start;
             p{
                 font-size: 24px;
                 font-weight: bold;
@@ -265,6 +273,9 @@ table {
             cursor: pointer;
         }
     }
+    .modal__content_btn-add{
+        margin: 0 auto;
+    }
     .modal__content{
        
         display: flex;
@@ -273,7 +284,7 @@ table {
         flex-direction: column;
         min-width: 34vw;
         height: 70%;
-       
+     
 
         .modal__content_btn-input{
             padding: 5px 10px;
@@ -317,4 +328,7 @@ table {
 }
 .green{
     color:green;
+}
+.grey{
+    background: #f1f1f1;
 }

@@ -59,10 +59,10 @@ function Main() {
                 <Name name={item.name}/></td>
                 <td>{(+item.vwap24Hr).toFixed(2)} $</td>
                 <td className={item.changePercent24Hr[0]=='-'?'red':'green'}>{(+item.changePercent24Hr).toFixed(2)} $</td>
-                <td>{(+item.marketCapUsd).toFixed(2)}$</td>
+                <td>{(+item.marketCapUsd/1000000000).toFixed(2)}$</td>
                 <td><b>{(+item.priceUsd).toFixed(2)}$</b></td>
                 <Icon id={item.id} priceUsd={(+item.priceUsd).toFixed(2)}/>
-                
+               
             
               </tr>)}
              

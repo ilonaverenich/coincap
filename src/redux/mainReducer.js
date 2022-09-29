@@ -22,6 +22,8 @@ export const changeStateBriefcase = createAction('CHANGE_STATE_BRIEFCASE')
 
 export const changeActiveCoin = createAction('CHANGE_ACTIVE_COIN')
 
+export const updateArrayBriefcase = createAction('UPDATE_ARRAY_BRIEFCASE')
+
 
 export default createReducer(initialValue,{
 
@@ -29,15 +31,11 @@ export default createReducer(initialValue,{
         state.coin = [...state.coin, action.payload]
     },
     [addCountListAction]: function(state,action){
-       //выбранные коины
-    state.listCoinState = [...state.listCoinState,...state.coin[0].filter(item=>item.id == action.payload.id)] 
-   /*  console.log(state.listCoinState)
-    state.countPrice = [...state.listCoinState.map(item=>(Number(item.priceUsd)).toFixed(2)).map(el=>+el)].reduce((a,b)=>a+b,0).toFixed(2) */
+        state.listCoinState = [...state.listCoinState,...state.coin[0].filter(item=>item.id == action.payload.id)] 
+   
     },
     [removeRepeatsCountListAction]: function(state,action){
      state.listCoinState = [...state.listCoinState.filter(item=>action.payload.id !==item.id )] 
-/*      state.countPrice = [...state.listCoinState.map(item=>(Number(item.priceUsd)).toFixed(2)).map(el=>+el)].reduce((a,b)=>a+b,0).toFixed(2)
-     console.log(state.listCoinState) */
 
      },
      [changeStateAddCoin]: function(state,action){
@@ -47,11 +45,16 @@ export default createReducer(initialValue,{
         state.stateBriefcase = action.payload;
          },
 
-     [changeActiveCoin]: function(state,action){
-        state.activeCoin = action.payload;
+     [updateArrayBriefcase]: function(state,action){
+        console.log(action.payload.id)
+        state.listCoinState =  [...state.listCoinState.map(item=>item.id==action.payload.id)] 
         },
+      [changeActiveCoin]: function(state,action){
+            state.activeCoin = [...state.activeCoin, action.payload];
+            },
 
      [addNewPriceCoinArray]: function(state,action){
+     
        state.arrayNewPrice = [...state.arrayNewPrice, action.payload] 
        console.log(state.arrayNewPrice)
         },
@@ -60,23 +63,6 @@ export default createReducer(initialValue,{
         state.countPrice = state.arrayNewPrice.reduce((a,b)=>a+b,0)
      },
 
-       /*  [calcCoinPrice]: function(state){
-            state.countPrice = [...state.listCoinState.map(item=>(Number(item.priceUsd)).toFixed(2)).map(el=>+el)].reduce((a,b)=>a+b,0).toFixed(2)
-            }, */
-
-     
-  /*    [calcCoinPrice]: function(state){
-        state.countPrice = [...state.listCoinState.map(item=>(Number(item.priceUsd)).toFixed(2)).map(el=>+el)].reduce((a,b)=>a+b,0).toFixed(2)
-         console.log(state.countPrice)
-        }, */
-     
-
-    /* [addStateAction]: function(state,action){
-        state.id = [...state.id,...state.coin[0].filter(item=>item.id == action.payload).map(el=>el.id)] */
     
-/*         state.addButtonState = [...state.coin.filter(item=>action.payload !== item.id)] */
-    /*  console.log(state.addButtonState[0].filter(item=>item.id=='bitcoin'))  },*/
-   
 })
 
-/* [...state.modules.filter(item => action.payload !== item.id)] */

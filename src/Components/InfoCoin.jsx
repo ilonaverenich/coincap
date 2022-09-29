@@ -22,10 +22,10 @@ function InfoCoin() {
       setState(true)
     }
     else {
-      dispatch(addNewPriceCoinArray(+(+value * +(+(coinActive.priceUsd)).toFixed(2)))) 
+     dispatch(addNewPriceCoinArray(+(+value * +(+(coinActive.priceUsd)).toFixed(2)))) 
       setState(false)
       setInputValue('')
-      dispatch(calcCoinPrice())
+      dispatch(calcCoinPrice()) 
       navigate(-1)
     }
   }

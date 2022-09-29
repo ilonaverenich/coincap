@@ -27,7 +27,7 @@ function Icon(props) {
  }
 
 
-  return <td className='icon-plus' onClick={()=>handleFunc()}>{state?<img width={15} src='https://i.postimg.cc/x1VLv5m3/icons8-24-1.png'/>:<img src='https://i.postimg.cc/pdnSd1N8/icons8-24.png'/>}</td>
+  return <td className={state?'icon-plus':'icon-plus grey'} onClick={()=>handleFunc()}><img width={15} src='https://i.postimg.cc/x1VLv5m3/icons8-24-1.png'/></td>
 }
 
 export default Icon

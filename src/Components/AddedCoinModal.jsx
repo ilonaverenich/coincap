@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {changeStateAddCoin, calcCoinPrice,addNewPriceCoinArray} from '../redux/mainReducer'
+import {changeStateAddCoin, calcCoinPrice,addNewPriceCoinArray,changeActiveCoin} from '../redux/mainReducer'
 
 
 
@@ -19,9 +19,10 @@ useEffect(()=>{
 
 function handleSubmit(){
    if(!isNaN(value)){
-   
-         dispatch(addNewPriceCoinArray(+(+value * +(+(coin[coin.length-1].priceUsd)).toFixed(2)).toFixed(2)))
-         dispatch(calcCoinPrice())
+      dispatch(addNewPriceCoinArray(coin))
+      dispatch(changeActiveCoin(+value))
+        /*  dispatch(addNewPriceCoinArray(+(+value * +(+(coin[coin.length-1].priceUsd)).toFixed(2)).toFixed(2))) */
+         /* dispatch(calcCoinPrice()) */
          dispatch(changeStateAddCoin(false))
       }
       else{
@@ -37,8 +38,9 @@ function handleSubmit(){
             </div>
            <div className='modal__title-block_buy'>
               Купить 
-           <p>{coin[coin.length-1].name}</p>
+        {/*    <p>{coin[coin.length-1].name}</p> */}
            </div>
+  
           <div className='modal__content-box'>
             <div className='modal__content'>
             <p className='modal__content_text'>  Введите количество: </p>
