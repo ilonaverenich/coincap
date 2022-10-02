@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function InfoCoin() {
   const coinActive = useSelector((store)=>store.data.activeCoin)
+
   const coin = useSelector((store)=>store.data.listCoinState)
   const [state,setState] = useState(false)
   const [value,setInputValue] = useState()
@@ -34,10 +35,10 @@ function InfoCoin() {
     <div className='content'>
       <div className='content__box-name'>
       <div className='content__box-name symbol'>
-           {coinActive.symbol}
+            {coin.symbol}
         </div>
         <div className='content__box-name title'>
-          {(coinActive.name).toUpperCase()}
+         {(coin.name).toUpperCase()} 
         </div>
         
           
@@ -58,28 +59,28 @@ function InfoCoin() {
           </tr>
           <tr>
             <td>Цена</td>
-            <td><b>{(+coinActive.priceUsd).toFixed(2)} $</b></td>
+            <td><b>{(+coin.priceUsd).toFixed(2)} $</b></td>
           </tr>
           <tr>
             <td>Доступное предложение для торговли</td>
-            <td>{(+coinActive.supply).toFixed(0)}</td>
+            <td>{(+coin.supply).toFixed(0)}</td>
           </tr>
           <tr>
             <td>Общее кол-во выпущенных активов</td>
-            <td>{(+coinActive.maxSupply).toFixed(0)}</td>
+            <td>{(+coin.maxSupply).toFixed(0)}</td>
           </tr>
           <tr>
             <td>Объем торгов за последние 24 часа</td>
-            <td>{(+coinActive.volumeUsd24Hr).toFixed(0)} $</td>
+            <td>{(+coin.volumeUsd24Hr).toFixed(0)} $</td>
           </tr>
           
           <tr>
             <td>Средняя цена по объёму за последние 24 часа</td>
-            <td>{(+coinActive.vwap24Hr).toFixed(2)} $</td>
+            <td>{(+coin.vwap24Hr).toFixed(2)} $</td>
           </tr>
           <tr>
             <td>Процентное изменения цены за последние 24 часа</td>
-            <td className={coinActive.changePercent24Hr[0]=='-'?'red':'green'}>{(+coinActive.changePercent24Hr).toFixed(2)}%</td>
+            <td className={coin.changePercent24Hr[0]=='-'?'red':'green'}>{(+coinActive.changePercent24Hr).toFixed(2)}%</td>
             
           </tr>
          

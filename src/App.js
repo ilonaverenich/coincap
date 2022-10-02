@@ -7,8 +7,9 @@ import { BrowserRouter, Route, Routes} from "react-router-dom";
 function App() {
   return (
     <div className="wrapper">
+    
+     <BrowserRouter> 
       <Header/>
-     <BrowserRouter>
           <Routes>
           <Route path='/' element={<Main/>}></Route>
           <Route path='/info' element={<InfoCoin/>}></Route>

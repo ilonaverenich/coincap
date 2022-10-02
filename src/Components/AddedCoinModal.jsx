@@ -38,7 +38,7 @@ function handleSubmit(){
             </div>
            <div className='modal__title-block_buy'>
               Купить 
-        {/*    <p>{coin[coin.length-1].name}</p> */}
+           <p>{coin[coin.length-1].name}</p>
            </div>
   
           <div className='modal__content-box'>
