@@ -81,25 +81,39 @@ header {
             width: 8em;
             justify-content: flex-start;
             p{
+                color:rgb(236, 0, 145); 
+                font-weight: bold;
                 font-size: 24px;
                 font-weight: bold;
             }
         }
     }
 }
-
+.main-table{
+    height: 70vh;
+   }
 table {
     padding: 2em 0px;
     width: 100%;
+   
     margin: 20px auto;
     border-collapse: collapse;
     border: 2px solid rgb(241, 241, 241);
-   
+
+ 
 
     th, td {
         border: 1px solid rgb(241, 241, 241);
-        padding: 4px;
+        padding: 2px;
         text-align: center;
+    }
+    .delete-row{
+        cursor: pointer;
+ 
+    }
+    .delete-row:hover{
+        color: #f1f1f1;
+        transition: 0.3s;
     }
     .table-name{
         text-align: left;
@@ -139,6 +153,22 @@ table {
         background: rgb(250, 221, 221);
     }
  
+
+}
+.table{
+    .total {
+    
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin: 20px auto;
+        justify-content: center;
+        p{
+            margin-left: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+       }
 }
 .content{
     width: 70%;
@@ -244,45 +274,52 @@ table {
  background: #fefefe;
     width: 100%;
     position: absolute; 
-    z-index: 10000;   
-    top: 20%;
-    left: 34%;
-    width: 37%;
-    height: 70%;
+    z-index: 1000000;   
+    top: 15%;
+    left: 25%;
+    width: 50%;
     display: flex;
     justify-content: center;
-    overflow: hidden;
     border-radius: 10px;
- 
+    overflow: clip ;
+    height: 80%;
     box-shadow: 1px 1px 4px rgb(236, 0, 145);
+    .modal-add{
+        width: 100%;
+        height: 10vh;
+    }
     .modal__content-box{
         border-radius: 10px;
-        background: rgb(241, 241, 241);
         height: 60%;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .modal__title-block_close{
-
-     display: flex;
-     justify-content: flex-end;
-     margin: 10px 0px;
+        display: flex;
+        justify-content: flex-end;
+        margin: 10px auto;
         img{
             display: block;
             cursor: pointer;
         }
     }
+   div{
+    width: 95%;
+    text-align: center;
+    margin: 0 auto;
+
     .modal__content_btn-add{
-        margin: 0 auto;
+        cursor: pointer;
     }
+   }
     .modal__content{
        
         display: flex;
         align-items: center;
         justify-content: space-around;
         flex-direction: column;
-        min-width: 34vw;
+        min-width: 50vw;
         height: 70%;
      
 
@@ -307,6 +344,7 @@ table {
     justify-content: center;
     font-size: 30px;
     margin: 10px;
+
     p{
         color: rgb(236, 0, 145);
         font-weight: bold;
@@ -331,4 +369,19 @@ table {
 }
 .grey{
     background: #f1f1f1;
+}
+.fixed{
+    position: fixed;
+    overflow:hidden;
+    margin: 0 auto;
+}
+.pagination{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   .pagination-btn{
+    margin: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+   }
 }

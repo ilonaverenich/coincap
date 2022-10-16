@@ -1,33 +1,22 @@
 import { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {addCountListAction,removeRepeatsCountListAction,calcCoinPrice,changeStateAddCoin} from '../redux/mainReducer'
-import AddedCoinModule from './AddedCoinModal';
+import {stateModalAddAction, activeCoinAction} from '../redux/mainReducer'
+
 
 function Icon(props) {
- const{id,priceUsd} = props; 
-
-
-  const [state, setState] = useState(true) 
+  let activeCoin = props.activeCoin;
+  const [state, setState] = useState(false) 
   const [data, setData] = useState('') 
-  
+  const dispatch = useDispatch()
 
- const dispatch = useDispatch()
-
- const count  = useSelector((store)=>store.data.countPrice)
- const stateAddCoin  = useSelector((store)=>store.data.stateAddCoin)
-
-
- function handleFunc(){
-  state?dispatch(changeStateAddCoin(true)):dispatch(changeStateAddCoin(false))
-  setState(state?false:true)
-  setData(priceUsd)
-  dispatch(calcCoinPrice())
-  state ? dispatch(addCountListAction({id,priceUsd})): dispatch(removeRepeatsCountListAction({id,priceUsd}));
-
+ function handleFunc(activeCoin){
+  dispatch(activeCoinAction(activeCoin))
+  setState(true)
+  dispatch(stateModalAddAction(true))
  }
 
+  return <td className='icon-plus' onClick={()=>handleFunc(activeCoin)}><img width={15} src='https://i.postimg.cc/vT9tsb6J/icons8-xbox-30.png'/></td>
 
-  return <td className={state?'icon-plus':'icon-plus grey'} onClick={()=>handleFunc()}><img width={15} src='https://i.postimg.cc/x1VLv5m3/icons8-24-1.png'/></td>
 }
 
 export default Icon

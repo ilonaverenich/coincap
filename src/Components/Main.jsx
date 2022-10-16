@@ -1,29 +1,33 @@
-import {setValue,coinListAction, changeActiveCoin} from '../redux/mainReducer';
 import {useSelector, useDispatch} from 'react-redux'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Icon from './Icon';
 import AddedCoinModule from './AddedCoinModal';
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Name from './Name';
 import Briefcase from './BriefcaseModal';
-
-
-//https://api.coincap.io/v2/assets?limit=10
+import {coinListAction, activeCoinAction} from '../redux/mainReducer'
+import Pagination from './Pagination';
 
 function Main() {
 
   const [coins, setCoins] = useState([])
-  const stateAddCoin  = useSelector((store)=>store.data.stateAddCoin)
-  const stateBriefcase = useSelector((store)=>store.data.stateBriefcase)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postPerPage, setPostPerPage] = useState(10)
+
+
+
+  const stateList = useSelector((state)=>state.data.stateModalAdd)
+  const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
     function handleFunc(item){
-   
-     dispatch( changeActiveCoin(item) )
+    dispatch(activeCoinAction(item))
     navigate('/info')   
     }
+
+    
    useEffect(()=>{
     axios.get('https://api.coincap.io/v2/assets').then(res=>{
       dispatch(coinListAction(res.data.data))
@@ -33,14 +37,18 @@ function Main() {
    },[])
 
 
+   const lastPostIndex = currentPage * postPerPage;
+   const firstPostIndex = lastPostIndex- postPerPage;
+   const currentPosts = coins.slice(firstPostIndex,lastPostIndex)
+
 
   return (
-    <div>
-            {stateAddCoin?<AddedCoinModule/>:''}
-            {stateBriefcase?<Briefcase/>:''}
-            <section className={stateAddCoin || stateBriefcase ?'content transpatent':'content'}>
-          <div className='content__table'>
-            <table>
+    <div >
+             {stateModalBriefCase?<Briefcase/>:''}
+             {stateList? <AddedCoinModule />:''}
+             <section className={stateList || stateModalBriefCase? 'content transpatent fixed':'content'}> 
+          <div className='content__table '>
+            <table className='main-table'>
               <tr>
                 <th>№</th>
                 <th></th>
@@ -51,8 +59,9 @@ function Main() {
                 <th>Price</th>
                 <th></th>
               </tr>
-              {coins && coins.map(item=>
-                 <tr >
+            
+              {currentPosts && currentPosts.map(item=>
+                 <tr > 
                 <td className='table-rank'>{item.rank}</td>
                 <td className='table-symbol'><b>{item.symbol}</b></td>
                 <td className='table-name' onClick={()=>handleFunc(item)}> 
@@ -61,13 +70,15 @@ function Main() {
                 <td className={item.changePercent24Hr[0]=='-'?'red':'green'}>{(+item.changePercent24Hr).toFixed(2)} $</td>
                 <td>{(+item.marketCapUsd/1000000000).toFixed(2)}$</td>
                 <td><b>{(+item.priceUsd).toFixed(2)}$</b></td>
-                <Icon id={item.id} priceUsd={(+item.priceUsd).toFixed(2)}/>
+                <Icon activeCoin={item} postPerPage={postPerPage}/>
                
             
-              </tr>)}
+              </tr>
+              )}
              
             </table>
-
+            {console.log(coins.length)}
+                <Pagination totalPost={coins.length} postPerPage={postPerPage} setCurrentPage={setCurrentPage}/>
        
      
           </div>

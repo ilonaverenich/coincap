@@ -2,27 +2,21 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const initialValue ={
     coin:[],
-    listCoinState:[],
-    countPrice:0,
-    stateAddCoin: false,
-    stateBriefcase: false,
-    arrayNewPrice:[],
-    activeCoin:[]
+    stateModalAdd: false,
+    stateModalBriefCase: false,
+    activeCoin:[],
+    listCoins:[],
+    resultCase:0
+ 
 }
 
 export const coinListAction = createAction('ADD_LIST_COIN')
-export const addCountListAction = createAction('ADD_COUNT_LIST_COIN')
-export const removeRepeatsCountListAction = createAction('REMOVE_REPEATS_COUNT_LIST_COIN')
+export const stateModalAddAction = createAction('STATE_MODAL_ADD')
+export const stateModalBriefCaseAction = createAction('STATE_MODAL_BRIEFCASE_ACTION')
+export const activeCoinAction = createAction('ACTIVE_COIN_ACTION')
+export const listCoinsAction = createAction('LIST_COINS_ACTION')
+export const deleteBriefCaseAction = createAction('DELETE_BRIEFCASE_ACTION')
 
-export const calcCoinPrice = createAction('CALC_COIN_PRICE')
-export const addNewPriceCoinArray = createAction('NEW_ARRAY_PRICE_COIN')
-
-export const changeStateAddCoin = createAction('CHANGE_STATE_ADD_COIN')
-export const changeStateBriefcase = createAction('CHANGE_STATE_BRIEFCASE')
-
-export const changeActiveCoin = createAction('CHANGE_ACTIVE_COIN')
-
-export const updateArrayBriefcase = createAction('UPDATE_ARRAY_BRIEFCASE')
 
 
 export default createReducer(initialValue,{
@@ -30,39 +24,23 @@ export default createReducer(initialValue,{
     [coinListAction]: function(state,action){
         state.coin = [...state.coin, action.payload]
     },
-    [addCountListAction]: function(state,action){
-        state.listCoinState = [...state.listCoinState,...state.coin[0].filter(item=>item.id == action.payload.id)] 
-   
+
+    [stateModalAddAction]: function(state, action){
+        state.stateModalAdd = action.payload; 
     },
-    [removeRepeatsCountListAction]: function(state,action){
-     state.listCoinState = [...state.listCoinState.filter(item=>action.payload.id !==item.id )] 
-
-     },
-     [changeStateAddCoin]: function(state,action){
-        state.stateAddCoin = action.payload;
-         },
-    [changeStateBriefcase]: function(state,action){
-        state.stateBriefcase = action.payload;
-         },
-
-     [updateArrayBriefcase]: function(state,action){
-        console.log(action.payload.id)
-        state.listCoinState =  [...state.listCoinState.map(item=>item.id==action.payload.id)] 
-        },
-      [changeActiveCoin]: function(state,action){
-            state.activeCoin = [...state.activeCoin, action.payload];
-            },
-
-     [addNewPriceCoinArray]: function(state,action){
-     
-       state.arrayNewPrice = [...state.arrayNewPrice, action.payload] 
-       console.log(state.arrayNewPrice)
-        },
-        
-    [calcCoinPrice]: function(state){
-        state.countPrice = state.arrayNewPrice.reduce((a,b)=>a+b,0)
-     },
-
-    
+    [stateModalBriefCaseAction]: function(state, action){
+        state.stateModalBriefCase = action.payload; 
+    },
+    [activeCoinAction]: function(state, action){
+        state.activeCoin = action.payload; 
+    },
+    [listCoinsAction]: function(state, action){      
+      state.listCoins = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload.activeCoin.id), action.payload]
+      state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
+    },
+    [deleteBriefCaseAction]: function(state, action){
+      state.listCoins = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload)]
+      state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
+      },
+   
 })
-

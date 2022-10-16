@@ -9,9 +9,10 @@ function App() {
     <div className="wrapper">
     
      <BrowserRouter> 
-      <Header/>
-          <Routes>
-          <Route path='/' element={<Main/>}></Route>
+       <Header/>
+          <Routes>  
+         
+          <Route path='/*' element={<Main/>}></Route>
           <Route path='/info' element={<InfoCoin/>}></Route>
           </Routes>      
      </BrowserRouter>
