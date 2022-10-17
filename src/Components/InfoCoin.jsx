@@ -3,6 +3,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import {listCoinsAction} from '../redux/mainReducer'
 import Briefcase from './BriefcaseModal';
+import shortenNumRu from '../shortenNumRu';
+import Graphs from './Graphs';
 
 
 function InfoCoin() {
@@ -66,21 +68,25 @@ function InfoCoin() {
             <th>Информация</th>
             <th>Данные о валюте</th>
           </tr>
+         
           <tr>
             <td>Цена</td>
             <td><b>{(+activeCoin.priceUsd).toFixed(2)} $</b></td>
           </tr>
+        
           <tr>
             <td>Доступное предложение для торговли</td>
-            <td>{(+activeCoin.supply).toFixed(2)}</td>
+            
+            <td>{shortenNumRu(+(+activeCoin.supply).toFixed(0))} </td>
           </tr>
           <tr>
             <td>Общее кол-во выпущенных активов</td>
-            <td>{(+activeCoin.maxSupply).toFixed(2)}</td>
+          
+            <td>{shortenNumRu(+(+activeCoin.maxSupply).toFixed(0))}</td>
           </tr>
           <tr>
             <td>Объем торгов за последние 24 часа</td>
-            <td>{(+activeCoin.volumeUsd24Hr).toFixed(2)} $</td>
+            <td>  {shortenNumRu(+(+activeCoin.volumeUsd24Hr).toFixed(0))} </td>
           </tr>
           
           <tr>
@@ -92,14 +98,16 @@ function InfoCoin() {
              <td className={activeCoin.changePercent24Hr[0]=='-'?'red':'green'}>{ ( +activeCoin.changePercent24Hr).toFixed(2)} %</td> 
             
           </tr>
-         
+          <tr>
+            <td>Сайт</td>
+            <td><b><a target='_blank' href={`${activeCoin.explorer}`}> {activeCoin.explorer}</a></b></td>
+          </tr>
         </table> 
       </div>
      
 
-      <div>
-          <p className='info__content_btn-count'>тут будет график</p>
-         
+      <div className='content__graph'>
+          <Graphs /> 
       </div>
       
     </div>

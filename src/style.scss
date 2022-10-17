@@ -1,3 +1,5 @@
+@import "~react-vis/dist/style";
+@import "~react-vis/dist/styles/legends";
 *{
     margin: 0;
     padding: 0;
@@ -173,7 +175,10 @@ table {
 .content{
     width: 70%;
     margin: 30px auto;
-
+.content__graph{
+    display: flex;
+    justify-content: center;
+}
    .content__box-name{
     display: flex;
     justify-content: center;
@@ -379,9 +384,16 @@ table {
    display: flex;
    justify-content: center;
    align-items: center;
+   .active{
+    background: red;
+    background: rgb(234, 154, 198);
+
+   }
    .pagination-btn{
+    width: 25px;
+    height: 25px;
     margin: 10px;
-    padding: 5px 10px;
+    //padding: 5px 10px;
     font-size: 16px;
    }
 }

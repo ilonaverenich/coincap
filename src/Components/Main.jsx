@@ -8,6 +8,7 @@ import Name from './Name';
 import Briefcase from './BriefcaseModal';
 import {coinListAction, activeCoinAction} from '../redux/mainReducer'
 import Pagination from './Pagination';
+import shortenNumRu from '../shortenNumRu'
 
 function Main() {
 
@@ -68,7 +69,7 @@ function Main() {
                 <Name name={item.name}/></td>
                 <td>{(+item.vwap24Hr).toFixed(2)} $</td>
                 <td className={item.changePercent24Hr[0]=='-'?'red':'green'}>{(+item.changePercent24Hr).toFixed(2)} $</td>
-                <td>{(+item.marketCapUsd/1000000000).toFixed(2)}$</td>
+                <td>{shortenNumRu(+(+item.marketCapUsd).toFixed(0))}$</td>
                 <td><b>{(+item.priceUsd).toFixed(2)}$</b></td>
                 <Icon activeCoin={item} postPerPage={postPerPage}/>
                
@@ -78,7 +79,7 @@ function Main() {
              
             </table>
             {console.log(coins.length)}
-                <Pagination totalPost={coins.length} postPerPage={postPerPage} setCurrentPage={setCurrentPage}/>
+            <Pagination totalPost={coins.length} postPerPage={postPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
        
      
           </div>
