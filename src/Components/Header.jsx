@@ -39,7 +39,7 @@ function Header() {
             <div className='header__shopping-cart-block_icon'>
             <img onClick={()=>dispatch(stateModalBriefCaseAction(true))} src="https://i.postimg.cc/yYN3ZN73/icons8-50.png" className='img-briefcase' alt="icon-shopping-card" />  
             </div>
-          <div className='header__shopping-cart-block_price'>Итого:<p>{resultCount} $ </p> </div>
+          <div className='header__shopping-cart-block_price'>Итого:<p> {resultCount}  {/* {JSON.parse(localStorage.getItem('active')).resultCase}  */} USD </p> <span>(Текущая стоимость/ процент)</span> </div>
           </div>
           
         </header>

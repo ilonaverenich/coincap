@@ -9,14 +9,13 @@ import Briefcase from './BriefcaseModal';
 import {coinListAction, activeCoinAction} from '../redux/mainReducer'
 import Pagination from './Pagination';
 import shortenNumRu from '../shortenNumRu'
+import TableLoader from './TableLoader';
 
 function Main() {
 
   const [coins, setCoins] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(10)
-
-
 
   const stateList = useSelector((state)=>state.data.stateModalAdd)
   const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
@@ -33,7 +32,7 @@ function Main() {
     axios.get('https://api.coincap.io/v2/assets').then(res=>{
       dispatch(coinListAction(res.data.data))
       setCoins(res.data.data);
-      localStorage.setItem('coin',res.data.data);
+
     })
    },[])
 
@@ -44,12 +43,14 @@ function Main() {
 
 
   return (
-    <div >
+    <div className='main'>
              {stateModalBriefCase?<Briefcase/>:''}
              {stateList? <AddedCoinModule />:''}
              <section className={stateList || stateModalBriefCase? 'content transpatent fixed':'content'}> 
+             {currentPosts.length==0?<TableLoader/>:''}
           <div className='content__table '>
             <table className='main-table'>
+            <tbody>
               <tr>
                 <th>№</th>
                 <th></th>
@@ -60,30 +61,29 @@ function Main() {
                 <th>Price</th>
                 <th></th>
               </tr>
-            
-              {currentPosts && currentPosts.map(item=>
-                 <tr > 
+             
+              { currentPosts && currentPosts.map(item=>
+                 <tr key={item.id} > 
                 <td className='table-rank'>{item.rank}</td>
                 <td className='table-symbol'><b>{item.symbol}</b></td>
                 <td className='table-name' onClick={()=>handleFunc(item)}> 
                 <Name name={item.name}/></td>
                 <td>{(+item.vwap24Hr).toFixed(2)} $</td>
                 <td className={item.changePercent24Hr[0]=='-'?'red':'green'}>{(+item.changePercent24Hr).toFixed(2)} $</td>
-                <td>{shortenNumRu(+(+item.marketCapUsd).toFixed(0))}$</td>
+                <td>{shortenNumRu(+(+item.marketCapUsd).toFixed(0))} $</td>
                 <td><b>{(+item.priceUsd).toFixed(2)}$</b></td>
                 <Icon activeCoin={item} postPerPage={postPerPage}/>
                
             
               </tr>
               )}
-             
+               </tbody>
             </table>
-            {console.log(coins.length)}
+  
             <Pagination totalPost={coins.length} postPerPage={postPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
        
      
           </div>
-    
     </section>
     </div>
      

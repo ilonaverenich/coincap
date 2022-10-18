@@ -10,8 +10,8 @@ import Graphs from './Graphs';
 function InfoCoin() {
 
   const activeCoin = useSelector((store)=>store.data.activeCoin)
-  const stateList = useSelector((state)=>state.data.stateModalAdd)
   const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
+  const listCoins = useSelector((state)=>state.data.listCoins)
   const [state,setState] = useState(false)
   const [count,setInputCount] = useState()
 
@@ -21,21 +21,21 @@ function InfoCoin() {
 
   useEffect(()=>{
     textInput.current.focus()
-
+   
  },[]) 
 
   function handleSubmit(){
     if(isNaN(+count)){
       setState(true)
-      
+    
   
     }
-    else {
+    else {    
       dispatch(listCoinsAction({activeCoin,count}))
       setState(false)
       setInputCount('')
       navigate(-1)    
-    
+  
     }
   }
 
@@ -57,13 +57,14 @@ function InfoCoin() {
 
       <div className='info__content'>
           <p className='info__content_count'><b>Введите количество:</b></p>
-          <input ref={textInput||''}  value={count} onChange={(e)=>setInputCount(e.target.value)}   className={state?'info__content_btn-input input-error':'info__content_btn-input'}/>
+          <input ref={textInput}  value={count|| ''} onChange={(e)=>setInputCount(e.target.value)}   className={state?'info__content_btn-input input-error':'info__content_btn-input'}/>
           <button className='btn info__content_btn' onClick={()=>handleSubmit()}>Купить</button>
           {state ? <span>Ошибка! Неправильный формат данных! </span>:''}
       </div>
 
       <div>
        <table className='table__info-coin'>
+       <tbody>
           <tr>
             <th>Информация</th>
             <th>Данные о валюте</th>
@@ -100,8 +101,10 @@ function InfoCoin() {
           </tr>
           <tr>
             <td>Сайт</td>
-            <td><b><a target='_blank' href={`${activeCoin.explorer}`}> {activeCoin.explorer}</a></b></td>
+            <td><a target='_blank' href={`${activeCoin.explorer}`}> {activeCoin.explorer}</a></td>
           </tr>
+
+          </tbody>
         </table> 
       </div>
      

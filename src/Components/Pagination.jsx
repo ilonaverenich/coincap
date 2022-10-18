@@ -5,7 +5,6 @@ function Pagination({totalPost,postPerPage,setCurrentPage,currentPage}) {
     for (let i=1; i<=Math.ceil(totalPost/postPerPage);i++){
         pages.push(i)
     }
-    console.log(pages)
   return (
     <div className='pagination'>
         {pages.map((page,index)=> {

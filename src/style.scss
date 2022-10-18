@@ -1,10 +1,10 @@
 @import "~react-vis/dist/style";
 @import "~react-vis/dist/styles/legends";
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-   
 }
 
 html{
@@ -12,21 +12,28 @@ html{
     margin: 0 auto;
     max-width: 1600px;
     font-family: 'Roboto', sans-serif;
-    overflow-x: hidden;
+   
     .input-error{
         border-color: red;
     }
 }
 
 header {
+    padding: 2px 0px;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    height: 5rem;
     font-size: 18px;
     margin: 0 auto;
-    
-    background: #f8f7f6;
+   @media (max-width: 991px) and (min-width: 768px) {
+   }
+   @media (max-width: 767px)  {
+    width: 100%;
+   
+   }
+   @media (max-width: 480px)  { 
+    display: block;
+   }
     .img-briefcase{
         cursor: pointer;
     }
@@ -36,7 +43,9 @@ header {
         justify-content: center;
         align-items: center;
         width: 200px;
-
+    @media (max-width: 480px)  { 
+            display: none;
+    }
         .header__block-title{
         width: 100%;
         font-size: 14px;
@@ -45,20 +54,19 @@ header {
         text-align: center;
         display: flex;
  
-    
         }
       .header__block-content{
         display: flex;
         flex-direction: row;
         width: 100%;
-        
+       
       }
 
-            .header__block-box
-            {
-                margin-right: 3rem;
-                div {
-                    font-size: 16px;
+       .header__block-box
+         {
+            margin-right: 3rem;
+            div {
+                  font-size: 16px;
                 }
             }
           
@@ -68,36 +76,42 @@ header {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-            .header__shopping-cart-block_icon{
-               &:hover{
-               
-            }
-            }
+        @media (max-width: 767px)  {
+            display: flex;
            
+           }
         div{
+           
     
-             text-align: left;
+            text-align: left;
             padding-right: 20px;
         }
         .header__shopping-cart-block_price{
-            width: 8em;
+         @media (max-width: 767px)  {
+                display: none;
+               
+               }
+            width: 10em;
             justify-content: flex-start;
+            span{
+                font-size: 11px;
+            }
             p{
                 color:rgb(236, 0, 145); 
                 font-weight: bold;
-                font-size: 24px;
+                font-size: 20px;
                 font-weight: bold;
             }
         }
     }
 }
+
 .main-table{
     height: 70vh;
    }
 table {
     padding: 2em 0px;
     width: 100%;
-   
     margin: 20px auto;
     border-collapse: collapse;
     border: 2px solid rgb(241, 241, 241);
@@ -119,15 +133,20 @@ table {
     }
     .table-name{
         text-align: left;
-        padding-left: 20px;
+        padding-left: 10px;
         width: 25%;
         font-weight: bold;
         cursor: pointer;
        
         span{
             color: black;
-            font-size: 18px;
+            font-size: 18px;  
+            @media (max-width: 580px)  {
+           font-size: 12px;
+           
+           }
         }
+      
     }
     .table-name:hover{
         background:#f1f1f1
@@ -138,9 +157,8 @@ table {
         margin-left: 15px;
         b{
              color: rgb(236, 0, 145);
-             padding: 0px 10px 0 0;
-
-                }
+             padding: 0px 10px 0px 0px;
+         }
     }
     .table-rank{
         width: 5%;
@@ -158,6 +176,7 @@ table {
 
 }
 .table{
+
     .total {
     
         display: flex;
@@ -173,8 +192,21 @@ table {
        }
 }
 .content{
-    width: 70%;
-    margin: 30px auto;
+    width: 100%;
+    padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+    @media (max-width: 991px) and (min-width: 768px)  {
+        width: 90%;
+       }
+    @media (max-width: 767px)  {
+        width: 100%;
+       }
+       @media (max-width: 600px)  {
+        width: 100%;
+        font-size: 10px;
+       }
 .content__graph{
     display: flex;
     justify-content: center;
@@ -185,12 +217,16 @@ table {
     align-items: center;
     flex-direction: row;
 
-   }
+  
    .title{
     font-weight: bold;
     font-size: 3rem;
     margin-left: 3rem;
-    color:  rgb(148, 3, 83);;
+    color:  rgb(148, 3, 83); 
+     @media (max-width: 767px)  {
+        font-size: 30px;
+       }
+   }
    }
    
    .symbol{
@@ -200,12 +236,21 @@ table {
     color: rgb(148, 3, 83);
     border: 4px solid rgb(148, 3, 83);
     background:  rgba(236, 0, 145, 0.4);
+
+    @media (max-width: 767px)  {
+        font-size: 28px;
+       }
    }
     .table__info-coin{
         tr, td{
             padding: 10px 2rem;
             text-align: left;
             width: 60%;
+            a{
+                display: block;
+                width: 120px;
+                word-wrap: break-word;
+            }
         }
     }
 
@@ -220,7 +265,11 @@ table {
         
         background: #f2f2f2;
         border-radius: 15px;
-     
+     b{
+        @media (max-width: 767px)  {
+            font-size: 16px;
+           }
+     }
     }
     .info__content_count{
         font-size: 24px;
@@ -277,28 +326,33 @@ table {
 
 .modal{
  background: #fefefe;
-    width: 100%;
     position: absolute; 
     z-index: 1000000;   
-    top: 15%;
-    left: 25%;
-    width: 50%;
+    top: 10%;
+    left: 10%;
+    width: 80%;
     display: flex;
     justify-content: center;
     border-radius: 10px;
-    overflow: clip ;
+    overflow-y: auto;
     height: 80%;
     box-shadow: 1px 1px 4px rgb(236, 0, 145);
     .modal-add{
         width: 100%;
-        height: 10vh;
+       /*  height: 10vh; */
     }
     .modal__content-box{
         border-radius: 10px;
-        height: 60%;
+        height: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .modal__title-block{
+        @media (max-width: 991px) and (min-width: 768px)  {
+       /*      background: rgb(213, 7, 48); */
+            width: 100%;
+           }
     }
     .modal__title-block_close{
         display: flex;
@@ -349,11 +403,13 @@ table {
     justify-content: center;
     font-size: 30px;
     margin: 10px;
-
+    @media (max-width: 480px)  {
+        font-size: 24px;
+       }
     p{
         color: rgb(236, 0, 145);
         font-weight: bold;
-        margin-left: 10px 
+        margin-left: 10px; 
     }
 
   }
@@ -384,16 +440,32 @@ table {
    display: flex;
    justify-content: center;
    align-items: center;
+   @media (max-width: 480px)  {
+    width: 100%;
+
+    }
+}
    .active{
-    background: red;
     background: rgb(234, 154, 198);
 
    }
    .pagination-btn{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     margin: 10px;
-    //padding: 5px 10px;
+    border-radius: 50%;
     font-size: 16px;
+
+    @media (max-width: 480px)  {
+        margin: 3px;
+        padding: 5px 5px;
+        font-size: 10px;
+        border-radius: 100%;
+        }
    }
+.case{
+    margin: 0 auto;
+    font-size: 26px;
+    color: red;
+    font-weight: bold;
 }

@@ -6,9 +6,12 @@ import {stateModalBriefCaseAction} from '../redux/mainReducer'
 
 function Briefcase() {
   const dispatch = useDispatch();
+  const resultCase = useSelector((state)=>state.data.resultCase)
+  const listCoins = useSelector((state)=>state.data.listCoins)
 
     function handleFunc(){
-
+      localStorage.setItem('listCoins',JSON.stringify({listCoins}));
+      localStorage.setItem('active',JSON.stringify({resultCase}));
     }
 
   return (

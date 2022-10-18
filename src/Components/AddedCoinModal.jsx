@@ -2,15 +2,13 @@ import React,{useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {stateModalAddAction,listCoinsAction,} from '../redux/mainReducer'
 
-
-
 function AddedCoinModule() {
 
 const [count,setInputCount] = useState()
 const [state,setState] = useState(false)
 const activeCoin = useSelector((store)=>store.data.activeCoin)
-
 const textInput = useRef(null)
+
 
 const dispatch = useDispatch()
 
@@ -20,6 +18,7 @@ useEffect(()=>{
 
 function handleSubmit(){
    if(!isNaN(count)){ 
+     
       dispatch(stateModalAddAction(false))
       dispatch(listCoinsAction({activeCoin,count}))
       }
@@ -41,8 +40,9 @@ function handleSubmit(){
           <div className='modal__content-box'>
             <div className='modal__content'>
             <p className='modal__content_text'>  Введите количество: </p>
-               <input ref={textInput}  onChange={(e)=>setInputCount(e.target.value)} value={count} className={state?'modal__content_btn-input input-error':'modal__content_btn-input'} />
+               <input ref={textInput}  onChange={(e)=>setInputCount(e.target.value)} value={count || ''} className={state?'modal__content_btn-input input-error':'modal__content_btn-input'} />
                   {state ? <span>Ошибка! Неправильный формат данных! </span>:''}
+
             <button className='btn modal__content_btn-add' onClick={()=> handleSubmit()} >Добавить</button>
             </div>
   
