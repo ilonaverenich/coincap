@@ -18,6 +18,7 @@ function Main() {
   const [postPerPage, setPostPerPage] = useState(10)
 
   const stateList = useSelector((state)=>state.data.stateModalAdd)
+  const listCoins = useSelector((state)=>state.data.listCoins)
   const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +27,9 @@ function Main() {
     dispatch(activeCoinAction(item))
     navigate('/info')   
     }
-
+    useEffect(()=>{
+      console.log(coins)
+    },[coins])
     
    useEffect(()=>{
     axios.get('https://api.coincap.io/v2/assets').then(res=>{

@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader'
 
 const TableLoader = props => (
   <ContentLoader
-    width={1000}
+    width={1300}
     height={550}
     viewBox="0 0 1000 550"
     backgroundColor="#eaeced"
@@ -71,4 +71,4 @@ TableLoader.metadata = {
   filename: 'TableLoader',
 }
 
-export default TableLoader
+export default TableLoader;

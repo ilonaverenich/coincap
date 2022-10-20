@@ -8,10 +8,10 @@ function Briefcase() {
   const dispatch = useDispatch();
   const resultCase = useSelector((state)=>state.data.resultCase)
   const listCoins = useSelector((state)=>state.data.listCoins)
-
+console.log(JSON.parse(JSON.parse(localStorage.getItem('persist:root')).data))
     function handleFunc(){
-      localStorage.setItem('listCoins',JSON.stringify({listCoins}));
-      localStorage.setItem('active',JSON.stringify({resultCase}));
+   /*    localStorage.setItem('listCoins',JSON.stringify({listCoins}));
+      localStorage.setItem('active',JSON.stringify({resultCase})); */
     }
 
   return (
@@ -26,7 +26,7 @@ function Briefcase() {
             <TableBriefCase/> 
             <div>
             </div>
-          
+       
           <div>
                <button className='btn modal__content_btn-add' onClick={()=>handleFunc()}>Купить</button>
           </div>
