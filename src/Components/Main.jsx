@@ -6,7 +6,7 @@ import AddedCoinModule from './AddedCoinModal';
 import {useNavigate } from "react-router-dom";
 import Name from './Name';
 import Briefcase from './BriefcaseModal';
-import {coinListAction, activeCoinAction} from '../redux/mainReducer'
+import {coinListAction, activeCoinAction,listCoinsAction,calcTotalValue} from '../redux/mainReducer'
 import Pagination from './Pagination';
 import shortenNumRu from '../shortenNumRu'
 import TableLoader from './TableLoader';
@@ -16,8 +16,11 @@ function Main() {
   const [coins, setCoins] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [postPerPage, setPostPerPage] = useState(10)
+  const [newValue, setNewValue] = useState(0)
 
   const stateList = useSelector((state)=>state.data.stateModalAdd)
+  const activeCoin = useSelector((state)=>state.data.activeCoin)
+  const resultCase = useSelector((state)=>state.data.resultCase)
   const listCoins = useSelector((state)=>state.data.listCoins)
   const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
   const navigate = useNavigate();
@@ -27,19 +30,31 @@ function Main() {
     dispatch(activeCoinAction(item))
     navigate('/info')   
     }
-    useEffect(()=>{
-      console.log(coins)
-    },[coins])
+
+   
     
+
    useEffect(()=>{
     axios.get('https://api.coincap.io/v2/assets').then(res=>{
       dispatch(coinListAction(res.data.data))
-      setCoins(res.data.data);
-
+      setCoins(res.data.data); 
+  
     })
    },[])
 
+   useEffect(()=>{   
+     localStorage.setItem('coins', JSON.stringify(coins))
+     localStorage.setItem('item',JSON.stringify(listCoins))
+   
 
+  },[coins])
+
+  useEffect(()=>{   
+    localStorage.setItem('item',JSON.stringify(listCoins))
+    dispatch(calcTotalValue())
+   
+
+ },[listCoins])
    const lastPostIndex = currentPage * postPerPage;
    const firstPostIndex = lastPostIndex- postPerPage;
    const currentPosts = coins.slice(firstPostIndex,lastPostIndex)

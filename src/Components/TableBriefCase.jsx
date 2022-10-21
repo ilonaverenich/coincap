@@ -12,10 +12,8 @@ function TableBriefCase() {
     function handleFunc(id){
      dispatch(deleteBriefCaseAction(id))
      dispatch(calcTotalValue(resultCase))
-
     } 
-
-
+    
   return (
     <div className='table'>
     <div>

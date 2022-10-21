@@ -18,8 +18,6 @@ function InfoCoinContent() {
     function handleSubmit(){
         if(isNaN(+count)){
           setState(true)
-        
-      
         }
         else {    
           dispatch(listCoinsAction({activeCoin,count}))

@@ -6,7 +6,8 @@ const initialValue ={
     stateModalBriefCase: false,
     activeCoin:[],
     listCoins:[],
-    resultCase:0
+    resultCase:0,
+    newCost:0
  
 }
 
@@ -16,13 +17,14 @@ export const stateModalBriefCaseAction = createAction('STATE_MODAL_BRIEFCASE_ACT
 export const activeCoinAction = createAction('ACTIVE_COIN_ACTION')
 export const listCoinsAction = createAction('LIST_COINS_ACTION')
 export const deleteBriefCaseAction = createAction('DELETE_BRIEFCASE_ACTION')
+export const calcTotalValue = createAction('CALC_TOTAL_VALUE_ACTION')
 
 
 
 export default createReducer(initialValue,{
 
     [coinListAction]: function(state,action){
-        state.coin = [...state.coin, action.payload]
+        state.coin = [ action.payload]
     },
 
     [stateModalAddAction]: function(state, action){
@@ -36,11 +38,18 @@ export default createReducer(initialValue,{
     },
     [listCoinsAction]: function(state, action){      
       state.listCoins = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload.activeCoin.id), action.payload]
-      state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
+/*       state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2) */
     },
     [deleteBriefCaseAction]: function(state, action){
       state.listCoins = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload)]
-      state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
+    /*   state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2) */
       },
+     
+    [calcTotalValue]: function(state){    
+
+        state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
+    
+      },
+      
    
 })

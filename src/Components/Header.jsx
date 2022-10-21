@@ -8,6 +8,7 @@ function Header() {
   const coin = useSelector((store)=>store.data.coin[0])
   const resultCount = useSelector((store)=>store.data.resultCase)
   const dispatch = useDispatch()
+  console.log(JSON.parse(JSON.parse(localStorage.getItem('persist:root')).data))  
 
 
   return (
