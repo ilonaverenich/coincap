@@ -7,7 +7,7 @@ const initialValue ={
     activeCoin:[],
     listCoins:[],
     resultCase:0,
-    newCost:0,
+    oldCost:0,
     newList:[]
  
 }
@@ -19,6 +19,7 @@ export const activeCoinAction = createAction('ACTIVE_COIN_ACTION')
 export const listCoinsAction = createAction('LIST_COINS_ACTION')
 export const deleteBriefCaseAction = createAction('DELETE_BRIEFCASE_ACTION')
 export const calcTotalValue = createAction('CALC_TOTAL_VALUE_ACTION')
+export const oldPriceAction = createAction ('OLD_PRICE_ACTION')
 
 export const newArrayAction = createAction('NEW_ARR_ACTION')
 
@@ -48,29 +49,16 @@ export default createReducer(initialValue,{
       state.listCoins = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload)]
     /*   state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2) */
       },
-     
-    [calcTotalValue]: function(state){    
-
-        state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
-    
+     [oldPriceAction]: function (state){
+      state.oldCost = (+[...state.listCoins.map(el=>+(Number(el.activeCoin.priceUsd).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2))
+     },
+    [calcTotalValue]: function(state,action){    
+      state.resultCase = (+(action.payload.count.map((el,i,arr)=> +el* +action.payload.cost[i])).reduce((prev,curr)=>prev+curr,0).toFixed(2))      
       },
 
       [newArrayAction]: function(state,action){   
-        console.log(action.payload) 
-        
-  
-        state.newList = action.payload.main.filter((el,i,arr)=>el.id==action.payload)//??
-
-        console.log(state.newList)
-        //state.newList = [...state.newList.filter(item=>item!==action.payload.map(el=>el.id)),...action.payload.filter(item=>item.id == state.listCoins.map(el=>el.activeCoin.id))] 
-     
-      
-
-/*   listCoins.map(function(item,index,array){
-    main.filter(function(it,ind,arr){
-      array[index].id==arr[ind].id?object.push(arr[ind]):0
-    })
-  }) */
+          state.newList = action.payload.main.filter((el) => action.payload.list.includes(el.id)
+    );
 
       },
       

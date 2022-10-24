@@ -10,7 +10,6 @@ function Graphs() {
     useEffect(()=>{
         axios.get(`https://api.coincap.io/v2/assets/${activeCoin.id}/history?interval=d1`).then(res=>{
           setCoins(res.data.data);
-
         })
        },[])
   

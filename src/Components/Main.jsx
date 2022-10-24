@@ -6,7 +6,7 @@ import AddedCoinModule from './AddedCoinModal';
 import {useNavigate } from "react-router-dom";
 import Name from './Name';
 import Briefcase from './BriefcaseModal';
-import {coinListAction, activeCoinAction,calcTotalValue} from '../redux/mainReducer'
+import {coinListAction, activeCoinAction,oldPriceAction} from '../redux/mainReducer'
 import Pagination from './Pagination';
 import shortenNumRu from '../shortenNumRu'
 import TableLoader from './TableLoader';
@@ -19,13 +19,11 @@ function Main() {
   const [newValue, setNewValue] = useState(0)
 
   const stateList = useSelector((state)=>state.data.stateModalAdd)
-  const activeCoin = useSelector((state)=>state.data.activeCoin)
-  const resultCase = useSelector((state)=>state.data.resultCase)
-  const listCoins = useSelector((state)=>state.data.listCoins)
   const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const object = [];
+
 
     function handleFunc(item){
     dispatch(activeCoinAction(item))
@@ -39,27 +37,14 @@ function Main() {
     axios.get('https://api.coincap.io/v2/assets').then(res=>{
       dispatch(coinListAction(res.data.data))
       setCoins(res.data.data);
-      
-      console.log(coins.filter(el=>el.id=='bitcoin'))
-  
+      dispatch(oldPriceAction())
+
     })
-   },[])
+   })
 
-   useEffect(()=>{   
-     localStorage.setItem('coins', JSON.stringify(coins))
-     localStorage.setItem('item',JSON.stringify(listCoins))
-  },[coins])
-
-  useEffect(()=>{   
-    localStorage.setItem('item',JSON.stringify(listCoins))
-    dispatch(calcTotalValue())
-   
-
- },[listCoins])
    const lastPostIndex = currentPage * postPerPage;
    const firstPostIndex = lastPostIndex- postPerPage;
    const currentPosts = coins.slice(firstPostIndex,lastPostIndex)
-
 
   return (
     <div className='main'>
@@ -110,13 +95,3 @@ function Main() {
 }
 
 export default Main
-
-
-/*    function calcMaxValue(){
-     console.log(coins.map(el=>+(+el.priceUsd).toFixed(2)).sort((a,b)=>b-a).slice(0,3))
-   } */
-/*    function addCoinList(el){
-    dispatch(addStateAction(el.id))
-    console.log(el.id,id)
-      id.includes(el.id) ?setState(true):setState(false)
-   } */
