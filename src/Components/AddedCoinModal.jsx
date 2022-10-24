@@ -1,6 +1,6 @@
 import React,{useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {stateModalAddAction,listCoinsAction,} from '../redux/mainReducer'
+import {stateModalAddAction,listCoinsAction,activeCoinAction} from '../redux/mainReducer'
 
 function AddedCoinModule() {
 
@@ -18,7 +18,6 @@ useEffect(()=>{
 
 function handleSubmit(){
    if(!isNaN(count)){ 
-     
       dispatch(stateModalAddAction(false))
       dispatch(listCoinsAction({activeCoin,count}))
       }

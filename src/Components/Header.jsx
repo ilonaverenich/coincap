@@ -8,8 +8,10 @@ function Header() {
   const coin = useSelector((store)=>store.data.coin[0])
   const resultCount = useSelector((store)=>store.data.resultCase)
   const dispatch = useDispatch()
-  console.log(JSON.parse(JSON.parse(localStorage.getItem('persist:root')).data))  
 
+    function handleFunc(){
+      dispatch(stateModalBriefCaseAction(true))
+    }
 
   return (
     <header> 
@@ -38,7 +40,7 @@ function Header() {
 
           <div className='header__shopping-cart-block'>
             <div className='header__shopping-cart-block_icon'>
-            <img onClick={()=>dispatch(stateModalBriefCaseAction(true))} src="https://i.postimg.cc/yYN3ZN73/icons8-50.png" className='img-briefcase' alt="icon-shopping-card" />  
+            <img onClick={()=>handleFunc()} src="https://i.postimg.cc/yYN3ZN73/icons8-50.png" className='img-briefcase' alt="icon-shopping-card" />  
             </div>
           <div className='header__shopping-cart-block_price'>Итого:<p> {resultCount}  {/* {JSON.parse(localStorage.getItem('active')).resultCase}  */} USD </p> <span>(Текущая стоимость/ процент)</span> </div>
           </div>

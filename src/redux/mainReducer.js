@@ -7,7 +7,8 @@ const initialValue ={
     activeCoin:[],
     listCoins:[],
     resultCase:0,
-    newCost:0
+    newCost:0,
+    newList:[]
  
 }
 
@@ -19,6 +20,7 @@ export const listCoinsAction = createAction('LIST_COINS_ACTION')
 export const deleteBriefCaseAction = createAction('DELETE_BRIEFCASE_ACTION')
 export const calcTotalValue = createAction('CALC_TOTAL_VALUE_ACTION')
 
+export const newArrayAction = createAction('NEW_ARR_ACTION')
 
 
 export default createReducer(initialValue,{
@@ -34,9 +36,11 @@ export default createReducer(initialValue,{
         state.stateModalBriefCase = action.payload; 
     },
     [activeCoinAction]: function(state, action){
+      console.log(action.payload)
         state.activeCoin = action.payload; 
     },
-    [listCoinsAction]: function(state, action){      
+    [listCoinsAction]: function(state, action){    
+ /*    console.log(action.payload)  */ 
       state.listCoins = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload.activeCoin.id), action.payload]
 /*       state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2) */
     },
@@ -50,6 +54,26 @@ export default createReducer(initialValue,{
         state.resultCase = [...state.listCoins.map(item=>Number((+(+item.activeCoin.priceUsd).toFixed(2)*(+item.count)).toFixed(2)))].reduce((prev,curr)=>prev+curr,0).toFixed(2)
     
       },
+
+      [newArrayAction]: function(state,action){   
+        console.log(action.payload) 
+        
+  
+        state.newList = action.payload.main.filter((el,i,arr)=>el.id==action.payload)//??
+
+        console.log(state.newList)
+        //state.newList = [...state.newList.filter(item=>item!==action.payload.map(el=>el.id)),...action.payload.filter(item=>item.id == state.listCoins.map(el=>el.activeCoin.id))] 
+     
+      
+
+/*   listCoins.map(function(item,index,array){
+    main.filter(function(it,ind,arr){
+      array[index].id==arr[ind].id?object.push(arr[ind]):0
+    })
+  }) */
+
+      },
+      
       
    
 })

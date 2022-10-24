@@ -6,7 +6,7 @@ import AddedCoinModule from './AddedCoinModal';
 import {useNavigate } from "react-router-dom";
 import Name from './Name';
 import Briefcase from './BriefcaseModal';
-import {coinListAction, activeCoinAction,listCoinsAction,calcTotalValue} from '../redux/mainReducer'
+import {coinListAction, activeCoinAction,calcTotalValue} from '../redux/mainReducer'
 import Pagination from './Pagination';
 import shortenNumRu from '../shortenNumRu'
 import TableLoader from './TableLoader';
@@ -25,6 +25,7 @@ function Main() {
   const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const object = [];
 
     function handleFunc(item){
     dispatch(activeCoinAction(item))
@@ -37,7 +38,9 @@ function Main() {
    useEffect(()=>{
     axios.get('https://api.coincap.io/v2/assets').then(res=>{
       dispatch(coinListAction(res.data.data))
-      setCoins(res.data.data); 
+      setCoins(res.data.data);
+      
+      console.log(coins.filter(el=>el.id=='bitcoin'))
   
     })
    },[])
@@ -45,8 +48,6 @@ function Main() {
    useEffect(()=>{   
      localStorage.setItem('coins', JSON.stringify(coins))
      localStorage.setItem('item',JSON.stringify(listCoins))
-   
-
   },[coins])
 
   useEffect(()=>{   

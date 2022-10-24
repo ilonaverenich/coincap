@@ -20,12 +20,12 @@ export default createReducer(initialValue,{
         state.newArr = [...state.listCoins.filter(item=>item.activeCoin.id!==action.payload.activeCoin.id), action.payload]
       },
      */
-
+/* 
     [calcTotalValue]: function(state, action){    
         
       state.totalValue = action.payload;
       console.log(state.totalValue)  
-    },
+    }, */
   
    
 })
