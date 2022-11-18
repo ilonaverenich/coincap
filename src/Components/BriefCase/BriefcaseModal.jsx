@@ -1,19 +1,13 @@
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import TableBriefCase from './TableBriefCase';
-import {stateModalBriefCaseAction} from '../redux/mainReducer'
+import {stateModalBriefCaseAction} from '../../redux/mainReducer'
 
 
 
 function Briefcase() {
   const dispatch = useDispatch();
-  const resultCase = useSelector((state)=>state.data.resultCase)
-  const listCoins = useSelector((state)=>state.data.listCoins)
 
-    function handleFunc(){
-   /*    localStorage.setItem('listCoins',JSON.stringify({listCoins}));
-      localStorage.setItem('active',JSON.stringify({resultCase})); */
-    }
-
+  
   return (
     <div className='modal'>
        <div className='modal__title-block'>
@@ -25,13 +19,8 @@ function Briefcase() {
            </div>  
             <TableBriefCase/> 
             <div>
-            </div>
-       
-          <div>
-               <button className='btn modal__content_btn-add' onClick={()=>handleFunc()}>Купить</button>
           </div>
-            </div>
-                
+       </div>  
     </div>
   )
 }

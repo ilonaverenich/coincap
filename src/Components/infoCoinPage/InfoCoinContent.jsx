@@ -1,19 +1,22 @@
-import shortenNumRu from '../shortenNumRu';
+import shortenNumRu from '../../shortenNumRu';
 import Graphs from './Graphs';
-import React,{useState, useEffect, useRef} from 'react'
+import React,{useState, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { useNavigate } from "react-router-dom";
-import {listCoinsAction} from '../redux/mainReducer'
+import {useNavigate } from "react-router-dom";
+import {listCoinsAction} from '../../redux/mainReducer'
 
 function InfoCoinContent() {
+    
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
     const activeCoin = useSelector((store)=>store.data.activeCoin)
     const stateModalBriefCase = useSelector((state)=>state.data.stateModalBriefCase)
     const [state,setState] = useState(false)
     const [count,setInputCount] = useState()
-  
-    const navigate = useNavigate();
+
     const textInput = useRef(null)
-    const dispatch = useDispatch();
+
 
     function handleSubmit(){
         if(isNaN(+count)){

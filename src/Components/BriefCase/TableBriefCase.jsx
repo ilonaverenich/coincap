@@ -1,39 +1,35 @@
 import {useSelector, useDispatch} from 'react-redux'
-import {deleteBriefCaseAction,listCoinsAction,coinListAction,newArrayAction,calcTotalValue} from '../redux/mainReducer'
+import {deleteBriefCaseAction,newArrayAction,calcTotalValue,costArrayAction} from '../../redux/mainReducer'
 import React,{useState, useEffect} from 'react'
-
 import axios from 'axios';
 
 function TableBriefCase() {
+
     const dispatch = useDispatch();
 
     const resultCase = useSelector((store)=>store.data.resultCase)
     const newList = useSelector((store)=>store.data.newList)
     const listCoins = useSelector((store)=>store.data.listCoins)
-/*     const resultCase = useSelector((store)=>store.data.resultCase) */
- //   const activeCoin = useSelector((state)=>state.data.activeCoin)
-// const [main, setMain] = useState([])
-const [list, setList] = useState(listCoins.map(el=>el.activeCoin.id))
-const [count, setCount] = useState(listCoins.map(el=>+el.count))
-const [cost, setCost] = useState(newList.map(el=>+(+el.priceUsd).toFixed(2)))
 
+    const [list, setList] = useState(listCoins.map(el=>el.activeCoin.id))
+    const [count, setCount] = useState(listCoins.map(el=>+el.count))
 
-useEffect(()=>{
+    useEffect(()=>{
+    axios.get('https://api.coincap.io/v2/assets/').then(res=>{
+        let main = res.data.data
+        setList(listCoins.map(el=>el.activeCoin.id));
+        dispatch(newArrayAction({main,list}))
+        dispatch(costArrayAction())
+      }) 
+    },[])
 
- axios.get('https://api.coincap.io/v2/assets/').then(res=>{
-    let main = res.data.data
-    setList(listCoins.map(el=>el.activeCoin.id));
-    dispatch(newArrayAction({main,list}))
-/*     dispatch(calcTotalValue({count,cost})) */
-  }) 
- },[])
   useEffect (()=>{
-    dispatch(calcTotalValue({count,cost}))
+    setCount(listCoins.map(el=>+el.count))
+    dispatch(calcTotalValue(count))
   })
 
     function handleFunc(id){
      dispatch(deleteBriefCaseAction(id))
-/*     dispatch(calcTotalValue(resultCase)) */
     } 
 
   return (
@@ -56,15 +52,15 @@ useEffect(()=>{
            {listCoins  && listCoins.map((item,index)=><tr key={index}>
         
             <td>{item.activeCoin.name}</td>
-            <td>{item.count}</td>
             <td>{newList && newList[index] && (+newList[index].priceUsd).toFixed(2)}</td>
-            <td>{newList && newList[index] && +(+newList[index].priceUsd).toFixed(2)* +item.count} $</td> 
+            <td>{item.count}</td>
+            <td>{newList && newList[index] && +(newList[index] && (+(+newList[index].priceUsd).toFixed(2)* + item.count)).toFixed(2)} $</td> 
             <td className='delete-row' onClick={()=>handleFunc(item.activeCoin.id)}><img src="https://i.postimg.cc/XvHDMLCS/icons8-24.png" title='delete' alt="delete"/></td>
            </tr>
           )} 
         </table>
        
-          <div className='total'>Итого:<p>{resultCase}  $</p></div>
+          <div className='total'>Итого:<p> {resultCase} $</p></div>
        </div>
   )
 }

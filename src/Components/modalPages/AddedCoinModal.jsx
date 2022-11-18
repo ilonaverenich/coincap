@@ -1,16 +1,14 @@
 import React,{useState, useEffect, useRef} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import {stateModalAddAction,listCoinsAction,activeCoinAction} from '../redux/mainReducer'
+import {stateModalAddAction,listCoinsAction} from '../../redux/mainReducer'
 
 function AddedCoinModule() {
 
+const dispatch = useDispatch()
 const [count,setInputCount] = useState()
 const [state,setState] = useState(false)
 const activeCoin = useSelector((store)=>store.data.activeCoin)
 const textInput = useRef(null)
-
-
-const dispatch = useDispatch()
 
 useEffect(()=>{
    textInput.current.focus()
@@ -21,8 +19,8 @@ function handleSubmit(){
       dispatch(stateModalAddAction(false))
       dispatch(listCoinsAction({activeCoin,count}))
       }
-      else{
-         setState(true)
+   else{
+      setState(true)
       } 
 
 } 

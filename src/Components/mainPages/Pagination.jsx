@@ -1,4 +1,3 @@
-import React from 'react'
 
 function Pagination({totalPost,postPerPage,setCurrentPage,currentPage}) {
     let pages = [];

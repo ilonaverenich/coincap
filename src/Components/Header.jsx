@@ -1,28 +1,23 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {useState, useEffect} from 'react';
 import {stateModalBriefCaseAction} from '../redux/mainReducer'
 
 
 function Header() {
+  const dispatch = useDispatch()
 
   const coin = useSelector((store)=>store.data.coin[0])
   const resultCount = useSelector((store)=>store.data.resultCase)
-  const oldCost = useSelector((state)=>state.data.oldCost)
-  const dispatch = useDispatch()
 
-    function handleFunc(){
-      dispatch(stateModalBriefCaseAction(true))
-    }
-console.log('mainCount'+resultCount)
-console.log('oldCost'+oldCost)
+  function handleFunc(){
+    dispatch(stateModalBriefCaseAction(true))
+ }
+
+
   return (
     <header> 
-    
           <div className='header__block'>
-           <div className='header__block-title'>
-          
+          <div className='header__block-title'>
           <p>Популярные криптовалюты: </p>
-           
            </div>
           <div className='header__block-content'>
               <div className='header__block-box'>
@@ -44,7 +39,7 @@ console.log('oldCost'+oldCost)
             <div className='header__shopping-cart-block_icon'>
             <img onClick={()=>handleFunc()} src="https://i.postimg.cc/yYN3ZN73/icons8-50.png" className='img-briefcase' alt="icon-shopping-card" />  
             </div>
-          <div className='header__shopping-cart-block_price'>Итого:<p> {resultCount} {/* <p>{(resultCount-oldCost).toFixed(2)}</p> */}   USD </p> <span>(Текущая стоимость/ процент)</span> </div>
+          <div className='header__shopping-cart-block_price'>Итого:<p> {isNaN(resultCount)?'loading...':resultCount}   USD </p> </div>
           </div>
           
         </header>

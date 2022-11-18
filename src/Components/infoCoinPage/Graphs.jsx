@@ -1,7 +1,7 @@
 import React,{ useEffect,useState} from 'react'
 import axios from 'axios';
 import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
-import {useSelector,useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 function Graphs() {
     const activeCoin = useSelector((store)=>store.data.activeCoin);

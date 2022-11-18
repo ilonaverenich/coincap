@@ -3,8 +3,8 @@ import ContentLoader from 'react-content-loader'
 
 const TableLoader = props => (
   <ContentLoader
-    width={1300}
-    height={550}
+    width={1200}
+    height={620}
     viewBox="0 0 1000 550"
     backgroundColor="#eaeced"
     foregroundColor="#ffffff"

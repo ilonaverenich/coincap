@@ -8,11 +8,9 @@ import { persistStore, persistReducer, FLUSH,
     PURGE,
     REGISTER, } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import totalReducer from './totalReducer';
 
 const rootReducer = combineReducers({
    data: mainReducer, 
-   test: totalReducer
 })
 
 const persistConfig = {

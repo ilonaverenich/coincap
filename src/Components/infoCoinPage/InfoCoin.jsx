@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux'
-import Briefcase from './BriefcaseModal';
+import Briefcase from '../BriefCase/BriefcaseModal';
 import InfoCoinContent from './InfoCoinContent';
-import NotFoundPage from './NotFoundPage';
+import NotFoundPage from '../NOTFOUND/NotFoundPage';
 
 
 function InfoCoin() {
@@ -13,7 +13,6 @@ function InfoCoin() {
     <div>
       {activeCoin.length===0?<NotFoundPage/>:<InfoCoinContent/>}
       {stateModalBriefCase?<Briefcase/>:''}
-   
     </div>
   )
 }
