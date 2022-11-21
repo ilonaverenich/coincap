@@ -26,7 +26,7 @@ function TableBriefCase() {
   useEffect (()=>{
     setCount(listCoins.map(el=>+el.count))
     dispatch(calcTotalValue(count))
-  })
+  },[])
 
     function handleFunc(id){
      dispatch(deleteBriefCaseAction(id))
