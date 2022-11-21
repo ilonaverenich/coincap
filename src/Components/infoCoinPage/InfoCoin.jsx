@@ -12,7 +12,7 @@ function InfoCoin() {
   return (
     <div>
       {activeCoin.length===0?<NotFoundPage/>:<InfoCoinContent/>}
-      {stateModalBriefCase?<Briefcase/>:''}
+      {stateModalBriefCase && <Briefcase/>}
     </div>
   )
 }

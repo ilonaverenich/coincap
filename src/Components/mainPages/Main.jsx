@@ -13,8 +13,8 @@ function Main() {
 
   return (
     <div className='main'>
-             {stateModalBriefCase?<Briefcase/>:''}
-             {stateList? <AddedCoinModule />:''}
+             {stateModalBriefCase && <Briefcase/>}
+             {stateList && <AddedCoinModule />}
              <section className={stateList || stateModalBriefCase? 'content transpatent fixed':'content'}> 
                 <div className='content__table '>
                    <MainTable />
