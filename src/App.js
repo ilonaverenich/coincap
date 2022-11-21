@@ -1,7 +1,7 @@
 import './style.scss'
 import Header from './Components/Header';
-import Main from './Components/mainPages/Main';
-import InfoCoin from './Components/infoCoinPage/InfoCoin';
+import Main from './Components/MainPages/Main';
+import InfoCoin from './Components/InfoCoinPage/InfoCoin';
 import { BrowserRouter, Route, Routes} from "react-router-dom";
 
 

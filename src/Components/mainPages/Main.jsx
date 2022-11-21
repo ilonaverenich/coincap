@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux'
-import AddedCoinModule from '../modalPages/AddedCoinModal';
+import AddedCoinModule from '../ModalPages/AddedCoinModal';
 import Briefcase from '../BriefCase/BriefcaseModal';
 import MainTable from './MainTable';
 
